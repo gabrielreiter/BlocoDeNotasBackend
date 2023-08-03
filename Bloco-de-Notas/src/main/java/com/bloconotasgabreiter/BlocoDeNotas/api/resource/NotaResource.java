@@ -27,7 +27,7 @@ public class NotaResource {
 		
 	}
 	
-	@PostMapping
+	@PostMapping("/salvar")
 	public ResponseEntity salvar(@RequestBody NotaDTO dto) {
 		
 		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
@@ -41,7 +41,7 @@ public class NotaResource {
 		}
 	}
 	
-	@PutMapping
+	@PutMapping("/editar")
 	public ResponseEntity editar(@RequestBody NotaDTO dto) {
 		
 		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
@@ -55,7 +55,7 @@ public class NotaResource {
 		}
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/deletar")
 	public ResponseEntity deletar(@RequestBody NotaDTO dto) {
 		
 		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
@@ -69,7 +69,7 @@ public class NotaResource {
 		}
 	}
 	
-	@GetMapping
+	@GetMapping("/visualizar")
 	public ResponseEntity visualizarTodos() {
 		
 		try {
