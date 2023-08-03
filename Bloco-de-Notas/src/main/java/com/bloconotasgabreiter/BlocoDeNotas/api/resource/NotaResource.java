@@ -1,8 +1,13 @@
 package com.bloconotasgabreiter.BlocoDeNotas.api.resource;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,16 +41,42 @@ public class NotaResource {
 		}
 	}
 	
-	@PostMapping
+	@PutMapping
 	public ResponseEntity editar(@RequestBody NotaDTO dto) {
 		
 		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
 		
 		try {
 			Nota notaEditada = service.editarNota(nota);
-			return new ResponseEntity(notaEditada, HttpStatus.CREATED);
+			return new ResponseEntity(notaEditada, HttpStatus.OK);
 		}
 		catch (RegraNegocioException e){
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+	
+	@DeleteMapping
+	public ResponseEntity deletar(@RequestBody NotaDTO dto) {
+		
+		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
+		
+		try {
+			service.excluirNota(nota);
+			return new ResponseEntity(HttpStatus.OK);
+		}
+		catch (RegraNegocioException e){
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+	
+	@GetMapping
+	public ResponseEntity visualizarTodos() {
+		
+		try {
+			List<Nota> notas = service.visualizarNotas();
+			return new ResponseEntity(notas, HttpStatus.OK);
+		}
+		catch(RegraNegocioException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
