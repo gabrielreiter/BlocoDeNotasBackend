@@ -24,7 +24,7 @@ public class NotaResource {
 	private NotaService service;
 	
 	public NotaResource(NotaService service) {
-		
+		this.service = service;
 	}
 	
 	@PostMapping("/salvar")
