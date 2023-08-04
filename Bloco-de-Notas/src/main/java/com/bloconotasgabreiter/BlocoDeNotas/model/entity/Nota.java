@@ -28,6 +28,10 @@ public class Nota {
 	@Column(name = "dt_atualizacao")
 	private LocalDateTime dataAtualizacao;
 	
+	public Nota() {
+		super();
+	}
+
 	public Nota(String titulo, String texto, LocalDateTime dataAtualizacao) {
 		this.titulo = titulo;
 		this.texto = texto;
@@ -83,6 +87,4 @@ public class Nota {
 		return Objects.equals(dataAtualizacao, other.dataAtualizacao) && Objects.equals(id, other.id)
 				&& Objects.equals(texto, other.texto) && Objects.equals(titulo, other.titulo);
 	}
-	
-	
 }
