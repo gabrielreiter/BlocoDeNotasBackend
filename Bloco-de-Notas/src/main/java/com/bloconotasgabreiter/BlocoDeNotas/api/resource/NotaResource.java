@@ -1,5 +1,6 @@
 package com.bloconotasgabreiter.BlocoDeNotas.api.resource;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class NotaResource {
 	@PostMapping("/salvar")
 	public ResponseEntity salvar(@RequestBody NotaDTO dto) {
 		
-		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
+		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), LocalDateTime.now());
 		
 		try {
 			Nota notaSalva = service.salvarNota(nota);
@@ -44,7 +45,7 @@ public class NotaResource {
 	@PutMapping("/editar")
 	public ResponseEntity editar(@RequestBody NotaDTO dto) {
 		
-		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
+		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), LocalDateTime.now());
 		
 		try {
 			Nota notaEditada = service.editarNota(nota);
@@ -58,7 +59,7 @@ public class NotaResource {
 	@DeleteMapping("/deletar")
 	public ResponseEntity deletar(@RequestBody NotaDTO dto) {
 		
-		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), dto.getDataAtualizacao());
+		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), LocalDateTime.now());
 		
 		try {
 			service.excluirNota(nota);
