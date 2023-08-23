@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +46,7 @@ public class NotaResource {
 	@PutMapping("/editar")
 	public ResponseEntity editar(@RequestBody NotaDTO dto) {
 		
-		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), LocalDateTime.now());
+		Nota nota = new Nota(dto.getId(), dto.getTitulo(), dto.getTexto(), LocalDateTime.now());
 		
 		try {
 			Nota notaEditada = service.editarNota(nota);
@@ -56,13 +57,11 @@ public class NotaResource {
 		}
 	}
 	
-	@DeleteMapping("/deletar")
-	public ResponseEntity deletar(@RequestBody NotaDTO dto) {
-		
-		Nota nota = new Nota(dto.getTitulo(), dto.getTexto(), LocalDateTime.now());
+	@DeleteMapping("{id}")
+	public ResponseEntity deletar(@PathVariable("id") Long id) {
 		
 		try {
-			service.excluirNota(nota);
+			service.excluirNota(id);
 			return new ResponseEntity(HttpStatus.OK);
 		}
 		catch (RegraNegocioException e){
