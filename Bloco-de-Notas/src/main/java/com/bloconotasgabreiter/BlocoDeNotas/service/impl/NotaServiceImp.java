@@ -52,9 +52,9 @@ public class NotaServiceImp implements NotaService{
 	}
 
 	@Override
-	public void excluirNota(Nota nota) {
-		Objects.requireNonNull(nota.getId());
-		repository.delete(nota);
+	public void excluirNota(Long id) {
+		Objects.requireNonNull(id);
+		repository.deleteById(id);
 	}
 
 	@Override
