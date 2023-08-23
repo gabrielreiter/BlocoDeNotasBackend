@@ -10,7 +10,7 @@ public interface NotaService {
 	
 	Nota editarNota(Nota nota);
 	
-	void excluirNota(Nota nota);
+	void excluirNota(Long id);
 	
 	void validarTitulo(String titulo);
 	
