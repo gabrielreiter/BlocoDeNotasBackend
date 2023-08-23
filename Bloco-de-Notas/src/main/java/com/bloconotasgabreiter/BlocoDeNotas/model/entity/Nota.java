@@ -32,6 +32,13 @@ public class Nota {
 		super();
 	}
 
+	public Nota(Long id, String titulo, String texto, LocalDateTime dataAtualizacao) {
+		this.id = id;
+		this.titulo = titulo;
+		this.texto = texto;
+		this.dataAtualizacao = dataAtualizacao;
+	}
+	
 	public Nota(String titulo, String texto, LocalDateTime dataAtualizacao) {
 		this.titulo = titulo;
 		this.texto = texto;
